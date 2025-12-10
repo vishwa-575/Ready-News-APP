@@ -1,0 +1,819 @@
+
+/* Light theme */
+:root[data-theme="light"] {
+  --bg-gradient: linear-gradient(135deg, #eef3ff, #e3ecff);
+  --text-color: #0f172a;
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --nav-bg: #020617;
+  --primary-btn: #2563eb;
+  --primary-btn-hover: #1d4ed8;
+  --accent-btn: #0ea5e9;
+}
+
+/* Dark theme */
+:root[data-theme="dark"] {
+  --bg-gradient: linear-gradient(135deg, #020617, #020617, #0b1220);
+  --text-color: #e5e7eb;
+  --card-bg: rgba(15, 23, 42, 0.82);
+  --nav-bg: #000000;
+  --primary-btn: #38bdf8;
+  --primary-btn-hover: #0ea5e9;
+  --accent-btn: #22c55e;
+}
+
+/* =================== GLOBAL =================== */
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-color);
+  min-height: 100vh;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Shared content container */
+.container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+/* =================== NAVBAR =================== */
+
+nav.navbar {
+  background: var(--nav-bg) !important;
+  padding: 12px 24px !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+.navbar-brand {
+  font-size: 22px;
+  font-weight: 700;
+  color: #f9fafb !important;
+}
+
+/* Top-right nav buttons (Add / My / Live) AND category buttons */
+.nav-btn {
+  padding: 9px 18px;
+  border-radius: 999px;
+  background: var(--primary-btn);
+  color: #f9fafb;
+  border: none;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  margin-right: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s ease, transform 0.12s ease,
+    box-shadow 0.18s ease;
+}
+
+.nav-btn:hover {
+  background: var(--primary-btn-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.45);
+}
+
+/* Active route or selected news category */
+.nav-btn.active {
+  background: var(--accent-btn);
+  color: #020617;
+  box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.5);
+}
+
+/* Theme toggle button (sun/moon) */
+.theme-btn {
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  cursor: pointer;
+  margin-left: 15px;
+  color: #f9fafb;
+}
+
+/* =================== NEWS GRID & CARDS =================== */
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+/* Glassy cards */
+.card {
+  border: none;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--card-bg);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 18px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.card-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(148, 163, 184, 0.95);
+}
+
+/* Buttons inside card aligned nicely */
+.card-buttons {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* =================== UNIVERSAL BUTTON STYLE =================== */
+
+/* Base shape + typography for app buttons */
+.btn,
+.nav-btn,
+.btn-read,
+.btn-save,
+.btn-edit,
+.btn-delete {
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 9px 18px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+/* Primary action: Read More, generic primary btn */
+.btn-primary,
+.btn-read {
+  background: var(--primary-btn);
+  color: #ffffff;
+}
+
+.btn-primary:hover,
+.btn-read:hover {
+  background: var(--primary-btn-hover);
+}
+
+/* Save to My News */
+.btn-success,
+.btn-save {
+  background: #16a34a;
+  color: #ffffff;
+}
+
+.btn-success:hover,
+.btn-save:hover {
+  background: #15803d;
+}
+
+/* Edit */
+.btn-warning,
+.btn-edit {
+  background: #fbbf24;
+  color: #111827;
+}
+
+.btn-warning:hover,
+.btn-edit:hover {
+  background: #f59e0b;
+}
+
+/* Delete */
+.btn-danger,
+.btn-delete {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.btn-danger:hover,
+.btn-delete:hover {
+  background: #b91c1c;
+}
+
+/* Slight spacing between inline buttons in cards (for old .btn usage) */
+.card .btn {
+  margin-right: 8px;
+  margin-top: 8px;
+}
+
+/* =================== ADD NEWS PAGE (GLASS FORM + PREVIEW) =================== */
+
+/* Page wrapper */
+.add-page {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+/* Main glass card */
+.add-card {
+  width: 90%;
+  max-width: 1150px;
+  padding: 28px;
+  border-radius: 22px;
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 0 45px rgba(15, 23, 42, 0.6);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 24px;
+}
+
+/* Left: form */
+.add-left {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.add-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.add-subtitle {
+  font-size: 14px;
+  color: rgba(148, 163, 184, 0.95);
+  margin-bottom: 18px;
+}
+
+.add-label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  margin-top: 10px;
+}
+
+/* Inputs / textarea */
+.add-input,
+.add-textarea {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  padding: 10px 12px;
+  font-size: 14px;
+  margin-bottom: 8px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.9);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.add-input:focus,
+.add-textarea:focus {
+  border-color: var(--primary-btn);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.35);
+  background: #ffffff;
+}
+
+.add-textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+/* Category row */
+.add-category-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.add-input-small {
+  max-width: 180px;
+}
+
+/* Submit button */
+.add-submit-btn {
+  margin-top: 16px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 999px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #2563eb, #22c55e);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.45);
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    filter 0.12s ease;
+}
+
+.add-submit-btn:hover {
+  filter: brightness(1.04);
+  transform: translateY(-1px);
+  box-shadow: 0 16px 32px rgba(37, 99, 235, 0.6);
+}
+
+/* Right: preview */
+.add-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.preview-card {
+  border-radius: 18px;
+  padding: 16px;
+  background: radial-gradient(circle at top left, #020617, #020617, #020617);
+  height: 60vh;
+  max-height: 460px;
+  color: #e5e7eb;
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-img {
+  width: 100%;
+  height: 220px;
+  border-radius: 14px;
+  object-fit: cover;
+  margin-bottom: 12px;
+}
+
+.preview-placeholder {
+  width: 100%;
+  height: 220px;
+  border-radius: 14px;
+  background: radial-gradient(circle at top left, #1f2937, #020617);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #9ca3af;
+  margin-bottom: 12px;
+}
+
+.preview-content {
+  padding: 6px 4px 0;
+}
+
+.preview-category {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #bfdbfe;
+  margin-bottom: 6px;
+}
+
+.preview-headline {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.preview-text {
+  font-size: 13px;
+  color: #d1d5db;
+  margin-bottom: 8px;
+}
+
+.preview-link {
+  font-size: 12px;
+  color: #60a5fa;
+  word-break: break-all;
+}
+
+/* =================== MODAL (EDIT NEWS) =================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-box {
+  background: var(--card-bg);
+  padding: 24px;
+  width: 420px;
+  max-width: 90vw;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.7);
+}
+
+.modal-box h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+/* Text fields inside modal reuse same style */
+.modal-box .form-control {
+  width: 100%;
+  border-radius: 10px;
+  padding: 9px 12px;
+  border: 1px solid #d1d5db;
+  margin-bottom: 10px;
+}
+
+/* =================== RESPONSIVE =================== */
+
+@media (max-width: 992px) {
+  .news-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    margin: 24px auto;
+  }
+
+  .add-card {
+    grid-template-columns: 1fr;
+  }
+}
+/* Global consistent button sizing */
+.card .btn,
+.btn-main,
+.btn-save,
+.btn-edit,
+.btn-delete,
+.btn-read {
+  padding: 10px 22px !important;
+  border-radius: 12px !important;
+  font-size: 16px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px; /* 👈 fixes uneven height */
+  line-height: 1 !important;
+}
+/* =================== HOME PAGE =================== */
+
+.home-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: var(--bg-gradient);
+}
+
+/* Hero layout */
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 32px;
+  align-items: center;
+  padding-top: 48px;
+  padding-bottom: 32px;
+  position: relative;
+  z-index: 1; /* above particles */
+}
+
+.hero-content {
+  max-width: 560px;
+}
+
+.hero-pill {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  background: rgba(15, 23, 42, 0.9);
+  color: #bfdbfe;
+  margin-bottom: 10px;
+}
+
+.hero-title {
+  font-size: 36px;
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+
+.hero-title span {
+  display: block;
+  color: var(--primary-btn);
+}
+
+.hero-subtitle {
+  font-size: 15px;
+  color: rgba(148, 163, 184, 0.95);
+  max-width: 480px;
+  margin-bottom: 22px;
+}
+
+/* Hero buttons reuse your button styles */
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.btn-main {
+  background: var(--primary-btn);
+  color: #f9fafb;
+  border: none;
+  text-decoration: none;
+}
+
+.btn-main:hover {
+  background: var(--primary-btn-hover);
+}
+
+.btn-secondary {
+  background: var(--accent-btn);
+  color: #020617;
+  text-decoration: none;
+  border: none;
+}
+
+.btn-outline {
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: transparent;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+/* Right side preview card */
+.hero-preview {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hero-preview-card {
+  border-radius: 18px;
+  padding: 18px 20px;
+  background: radial-gradient(circle at top left, #020617, #020617, #020617);
+  color: #e5e7eb;
+  max-width: 360px;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.8);
+}
+
+.hero-preview-category {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #93c5fd;
+  margin-bottom: 8px;
+}
+
+.hero-preview-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.hero-preview-text {
+  font-size: 13px;
+  color: #d1d5db;
+}
+
+/* Feature section */
+.home-features {
+  padding-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.section-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.feature-card {
+  padding: 18px 16px;
+  border-radius: 18px;
+  background: var(--card-bg);
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.4);
+}
+
+.feature-card h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.feature-card p {
+  font-size: 14px;
+  color: rgba(148, 163, 184, 0.95);
+}
+
+/* FOOTER with COPYRIGHT */
+.footer {
+  margin-top: auto;         /* pushes footer to bottom */
+  padding: 14px 0 18px;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(148, 163, 184, 0.9);
+  border-top: 1px solid rgba(148, 163, 184, 0.25);
+  backdrop-filter: blur(10px);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-preview {
+    justify-content: flex-start;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* ===================================== */
+/* HOME PAGE BUTTONS (CLEAN + MODERN UI) */
+/* ===================================== */
+
+.home-action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+/* Base style for all home buttons */
+.home-btn {
+  padding: 12px 28px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  border: none;
+  cursor: pointer;
+  height: 48px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.25);
+}
+
+/* Primary button – Blue (Action) */
+.home-btn-primary {
+  background: var(--primary-btn);
+  color: #ffffff;
+}
+
+.home-btn-primary:hover {
+  background: var(--primary-btn-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+}
+
+/* Accent button – Green/Teal (Live News) */
+.home-btn-accent {
+  background: var(--accent-btn);
+  color: #020617;
+}
+
+.home-btn-accent:hover {
+  filter: brightness(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(34, 197, 94, 0.35);
+}
+
+/* Outline button – Minimal grey border */
+.home-btn-outline {
+  border: 2px solid rgba(148, 163, 184, 0.45);
+  background: transparent;
+  color: var(--text-color);
+}
+
+.home-btn-outline:hover {
+  border-color: var(--primary-btn);
+  color: var(--primary-btn);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.25);
+}
+.brand-masthead {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 42px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+
+  /* Newspaper black & white aesthetic */
+  color: #000;
+  background: #fff;
+
+  padding: 10px 25px;
+  border: 3px solid #000;
+  border-radius: 6px;
+
+  display: inline-block;
+  margin-bottom: 20px;
+
+  box-shadow: 0 8px 0 #000;
+}
+
+/* Highlight the word NEWS */
+.brand-masthead span {
+  color: #d00000; /* deep bold red like NYTimes */
+}
+/* BUTTON STACK FOR NEWS CARDS */
+.card-buttons {
+  display: flex;
+  flex-direction: column;        /* stack vertically */
+  gap: 10px;                     /* spacing */
+  margin-top: 15px;
+}
+
+/* MATCH NAVBAR BUTTON STYLE */
+.news-btn {
+  width: 120px;                  /* adjust size */
+  padding: 10px 15px;
+  border-radius: 25px;           /* pill shape */
+  border: none;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+/* COLORS SAME AS NAVBAR */
+.btn-read {
+  background: #0515fb;           /* blue */
+}
+.btn-read:hover {
+  background: #0515fb;
+}
+
+.btn-edit {
+  background: #0515fb;           /* yellow */
+  color: #f9f4f4;
+}
+.btn-edit:hover {
+  background: #0515fb;
+}
+
+.btn-delete {
+  background: #0515fb;           /* red */
+}
+.btn-delete:hover {
+  background: #0515fb;
+}
+
